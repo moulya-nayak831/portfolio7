@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Crops - Sunrise GoldenFields</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #f8f5e9;
+    color: #173f25;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    height: 80px;
+    background: #fffaf0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f4b51b, #20752d);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.logo-text h2 {
+    font-size: 25px;
+    color: #174c28;
+}
+
+.logo-text p {
+    font-size: 13px;
+    color: #65715f;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #222;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 0;
+}
+
+.nav-links a:hover,
+.nav-links .active {
+    color: #176329;
+}
+
+.nav-links .active {
+    border-bottom: 3px solid #176329;
+}
+
+.search {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #e8ebd3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.contact-btn {
+    background: #176329;
+    color: white !important;
+    padding: 13px 25px !important;
+    border-radius: 25px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 275px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 40px 5%;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8,54,25,0.92),
+            rgba(8,54,25,0.48),
+            rgba(8,54,25,0.08)
+        ),
+        url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1800&q=85");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    color: white;
+    max-width: 650px;
+}
+
+.small-title {
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.small-title::before {
+    content: "🌿 ";
+}
+
+.hero h1 {
+    font-size: 60px;
+    line-height: 1;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.hero h1 span {
+    color: #f3d35c;
+}
+
+.hero h3 {
+    font-size: 28px;
+    font-style: italic;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    max-width: 500px;
+}
+
+/* ================= CROPS SECTION ================= */
+
+.crops-section {
+    padding: 28px 4%;
+}
+
+.section-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    font-size: 38px;
+    color: #153e24;
+}
+
+.section-title h2::before {
+    content: "🌿 ";
+}
+
+.section-title p {
+    font-family: Arial, sans-serif;
+    color: #657064;
+    font-size: 17px;
+    margin-top: 5px;
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.filter {
+    border: none;
+    padding: 11px 22px;
+    border-radius: 22px;
+    background: #efede3;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.filter.active {
+    background: #176329;
+    color: white;
+}
+
+/* ================= CROP CARDS ================= */
+
+.crop-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+}
+
+.crop-card {
+    background: #fffdf7;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e5e1ce;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.crop-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.13);
+}
+
+.crop-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.crop-info {
+    text-align: center;
+    padding: 12px 15px 20px;
+    min-height: 155px;
+}
+
+.crop-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #f5f3df;
+    margin: -35px auto 8px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    border: 1px solid #ddd8b7;
+}
+
+.crop-info h3 {
+    font-size: 21px;
+    color: #15582b;
+    margin-bottom: 8px;
+}
+
+.line {
+    width: 32px;
+    height: 2px;
+    background: #e8b72b;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.crop-info p {
+    font-family: Arial, sans-serif;
+    color: #606660;
+    line-height: 1.45;
+    font-size: 14px;
+}
+
+/* ================= BOTTOM BANNER ================= */
+
+.banner {
+    min-height: 125px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8,67,27,0.96),
+            rgba(23,90,34,0.82)
+        ),
+        url("https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1600&q=80");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 25px;
+}
+
+.banner h2 {
+    font-size: 31px;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.banner h2 span {
+    color: #f4d052;
+}
+
+.banner p {
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
+
+    .crop-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .filters {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .navbar {
+        height: auto;
+        padding: 15px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .hero h3 {
+        font-size: 22px;
+    }
+
+    .section-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .crop-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+
+    .crop-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        min-height: 330px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo-area">
+
+        <div class="logo">
+            🌱
+        </div>
+
+        <div class="logo-text">
+            <h2>Sunrise GoldenFields</h2>
+            <p>Seeds of Success, Fields of Growth</p>
+        </div>
+
+    </div>
+
+
+    <nav class="nav-links">
+
+        <a href="index.html">Home</a>
+
+        <a href="About1.html">About Us</a>
+
+        <a href="crops.html" class="active">
+            Our Crops
+        </a>
+
+        <a href="product.html">Products</a>
+
+        <a href="Contact1.html">Contact</a>
+
+        
+        </div>
+
+        <a href="Contact1.html" class="contact-btn">
+            🌿 Get In Touch
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="small-title">
+            FARM FRESH • NATURALLY GROWN
+        </div>
+
+        <h1>
+            Our <span>Crops</span>
+        </h1>
+
+        <h3>
+            Fresh, Healthy & Naturally Grown
+        </h3>
+
+        <p>
+            From fertile soil to your table, we grow
+            nature's finest crops with care and dedication.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CROPS ================= -->
+
+<section class="crops-section">
+
+    <div class="section-top">
+
+        <div class="section-title">
+
+            <h2>
+                Nature's Best
+            </h2>
+
+            <p>
+                Healthy crops, healthy people, a healthier tomorrow.
+            </p>
+
+        </div>
+
+
+        <div class="filters">
+
+            <a class="filter active" href="cereals.html">
+                All Crops
+            </a>
+
+            <a class="filter active" href="cereals.html ">
+                Cereals
+            </a>
+
+            <a class="filter active" href="cereals.html">
+                Vegetables
+            </a>
+
+            <a class="filter active" href="cereals.html">
+                Cash Crops
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="crop-grid">
+
+
+        <!-- WHEAT -->
+
+        <div class="crop-card">
+
+            <img
+                class="crop-image"
+                src="wheat.jpg"
+                alt="Wheat">
+
+            <div class="crop-info">
+
+                <div class="crop-icon">
+                    🌾
+                </div>
+
+                <h3>Wheat</h3>
+
+                <div class="line"></div>
+
+                <p>
+                    Nutritious, high-yielding
+                    and a staple for a
+                    healthier tomorrow.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- RICE -->
+
+        <div class="crop-card">
+
+            <img
+                class="crop-image"
+                src="r.jpg"
+                alt="Rice">
+
+            <div class="crop-info">
+
+                <div class="crop-icon">
+                    🌱
+                </div>
+
+                <h3>Rice</h3>
+
+                <div class="line"></div>
+
+                <p>
+                    Rich in nutrition,
+                    feeding families
+                    across generations.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- MAIZE -->
+
+        <div class="crop-card">
+
+            <img
+                class="crop-image"
+                src="m.jpg"
+                alt="Maize">
+
+            <div class="crop-info">
+
+                <div class="crop-icon">
+                    🌽
+                </div>
+
+                <h3>Maize</h3>
+
+                <div class="line"></div>
+
+                <p>
+                    High energy, high value,
+                    a key crop for
+                    a stronger future.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOMATO -->
+
+        <div class="crop-card">
+
+            <img
+                class="crop-image"
+                src="t.jpg"
+                alt="Tomato">
+
+            <div class="crop-info">
+
+                <div class="crop-icon">
+                    🍅
+                </div>
+
+                <h3>Tomato</h3>
+
+                <div class="line"></div>
+
+                <p>
+                    Fresh, flavorful and
+                    full of goodness
+                    from our fields.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- COTTON -->
+
+        <div class="crop-card">
+
+            <img
+                class="crop-image"
+                src="cotton.jpg"
+                alt="Cotton">
+
+            <div class="crop-info">
+
+                <div class="crop-icon">
+                    🌼
+                </div>
+
+                <h3>Cotton</h3>
+
+                <div class="line"></div>
+
+                <p>
+                    Soft fibers, strong
+                    livelihoods, sustainable
+                    growth.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUGARCANE -->
+
+        <div class="crop-card">
+
+            <img
+                class="crop-image"
+                src="suger.jpg"
+                alt="Sugarcane">
+
+            <div class="crop-info">
+
+                <div class="crop-icon">
+                    🌿
+                </div>
+
+                <h3>Sugarcane</h3>
+
+                <div class="line"></div>
+
+                <p>
+                    Natural sweetness,
+                    powering a better
+                    future.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= GREEN BANNER ================= -->
+
+<section class="banner">
+
+    <div>
+
+        <h2>
+            Grown with Care
+            <span> • </span>
+            Harvested with Purpose
+        </h2>
+
+        <p>
+            Better Crops
+            &nbsp; • &nbsp;
+            Healthier Communities
+            &nbsp; • &nbsp;
+            A Greener Tomorrow
+        </p>
+
+    </div>
+
+</section>
+
+
+</body>
+</html>

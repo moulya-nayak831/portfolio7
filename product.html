@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>sunrise- Order Products</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4faef;
+    color: #174d2d;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    height: 70px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#ffd51a,#69a92c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.logo-text h1 {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    color: #14552e;
+}
+
+.logo-text p {
+    color: #4c8b5b;
+    font-size: 13px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #143d27;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+nav a:hover {
+    color: #079447;
+}
+
+.order-btn,
+.cart-top {
+    background: #dff3d4;
+    padding: 13px 20px;
+    border-radius: 14px;
+}
+
+.cart-top {
+    background: #087d43;
+    color: white;
+}
+
+/* ================= MAIN ================= */
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 355px;
+    gap: 20px;
+    padding: 0 25px 25px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 190px;
+    margin-top: 0;
+    border-radius: 0 0 10px 10px;
+    padding: 25px 40px;
+    background:
+        linear-gradient(90deg, rgba(235,250,220,.95), rgba(235,250,220,.25)),
+        url("https://images.unsplash.com/photo-1492496913980-501348b61469?auto=format&fit=crop&w=1400&q=80");
+    background-size: cover;
+    background-position: center;
+}
+
+.hero h2 {
+    font-size: 39px;
+    margin-bottom: 8px;
+}
+
+.hero p {
+    font-size: 19px;
+    color: #16452c;
+}
+
+.features {
+    display: flex;
+    gap: 25px;
+    margin-top: 28px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-right: 1px solid #a9c8aa;
+    padding-right: 22px;
+}
+
+.feature span {
+    font-size: 25px;
+}
+
+/* ================= CATEGORIES ================= */
+
+.categories {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.category {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 20px;
+    background: #e8f6e1;
+    color: #185e34;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.category.active {
+    background: #087d43;
+    color: white;
+}
+
+.search {
+    margin-left: auto;
+    padding: 12px 15px;
+    border: 1px solid #c8dcc9;
+    border-radius: 12px;
+    min-width: 190px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.product {
+    background: white;
+    border: 1px solid #dcebd7;
+    border-radius: 10px;
+    padding: 11px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.04);
+}
+
+.product img {
+    width: 100%;
+    height: 125px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product h3 {
+    font-size: 15px;
+    margin: 9px 0 6px;
+}
+
+.product p {
+    font-size: 12px;
+    color: #68756d;
+    line-height: 1.4;
+}
+
+.price {
+    font-size: 17px;
+    font-weight: bold;
+    color: #08743c;
+    margin: 8px 0;
+}
+
+.product-bottom {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.qty {
+    display: flex;
+    border: 1px solid #cce4cf;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.qty button {
+    width: 25px;
+    height: 29px;
+    border: none;
+    background: #edf8e9;
+    color: #146034;
+    cursor: pointer;
+}
+
+.qty span {
+    width: 27px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-btn {
+    flex: 1;
+    border: none;
+    background: #078449;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 8px 4px;
+}
+
+.add-btn:hover {
+    background: #056b3b;
+}
+
+/* ================= RIGHT SIDEBAR ================= */
+
+.sidebar {
+    padding-top: 0;
+}
+
+.box {
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #dbead9;
+    overflow: hidden;
+}
+
+.box-title {
+    background: #e9f6e2;
+    padding: 13px;
+    font-weight: bold;
+    color: #174d2d;
+}
+
+.cart-items {
+    padding: 8px 12px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 55px 1fr;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #e2e9e1;
+}
+
+.cart-item img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-name {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.cart-price {
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.cart-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.cart-controls button {
+    border: 1px solid #cce2cc;
+    background: #edf7ea;
+    padding: 3px 8px;
+    cursor: pointer;
+}
+
+.delete {
+    color: #555;
+    border: none !important;
+    background: white !important;
+}
+
+/* ================= TOTAL ================= */
+
+.total-box {
+    padding: 12px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 0;
+    font-size: 14px;
+}
+
+.total-row.final {
+    border-top: 1px solid #ddd;
+    font-weight: bold;
+    font-size: 17px;
+    color: #08743c;
+}
+
+.checkout {
+    width: 100%;
+    background: #078449;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+/* ================= CUSTOMER ================= */
+
+.customer {
+    padding: 12px;
+}
+
+.customer label {
+    font-size: 12px;
+    display: block;
+    margin: 6px 0;
+}
+
+.customer input,
+.customer textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #cdddcf;
+    border-radius: 5px;
+}
+
+.customer textarea {
+    height: 60px;
+    resize: none;
+}
+
+.bill-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background: #078449;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* ================= BILL ================= */
+
+.bill {
+    padding: 10px;
+    font-size: 11px;
+}
+
+.bill table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bill th,
+.bill td {
+    border: 1px solid #d5e3d5;
+    padding: 5px;
+    text-align: center;
+}
+
+.bill th {
+    background: #edf7e9;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    background: #e4f5df;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    color: #205c36;
+}
+
+.footer-item h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.footer-item p {
+    font-size: 12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px) {
+
+    .products {
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+}
+
+@media(max-width:700px) {
+
+    header {
+        height: auto;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    .products {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .features {
+        flex-wrap: wrap;
+    }
+
+    .hero h2 {
+        font-size: 28px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media(max-width:450px) {
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .categories {
+        flex-direction: column;
+    }
+
+    .search {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo-section">
+
+        <div class="logo">🌱</div>
+            <div class="logo-text">
+            <h1>Sunrise <span>GoldenFields</span></h1>
+     		   <p>Seeds of Success, Fields of Growth</p>
+
+        </div>
+
+
+       
+
+    </div>
+
+    <nav>
+        <a href="index.html">  Home</a>
+ <a href=About1.html">About us</a>
+
+        <a href="Crops.html">Our Crops</a>
+        <a href="product.html" class="order-btn">🛒 Order Products</a>
+        
+
+        <a href="Contact1.html"> Contact</a>
+        <a href="#" class="cart-top">🛒 My Cart (<span id="topCart">0</span>)</a>
+    </nav>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<div class="container">
+
+<div class="main">
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <h2>Order Agricultural Products</h2>
+
+    <p>
+        High quality seeds, fertilizers and farm essentials —
+        delivered to your door.
+    </p>
+
+    <div class="features">
+
+        <div class="feature">
+            <span>🌿</span>
+            Best Quality
+        </div>
+
+        <div class="feature">
+            <span>🚚</span>
+            Fast Delivery
+        </div>
+
+        <div class="feature">
+            <span>🛡️</span>
+            Secure Payment
+        </div>
+
+        <div class="feature">
+            <span>🤝</span>
+            Support Farmers
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<div class="categories">
+
+    <button class="category active" onclick="filterProducts('all')">
+        🌿 All Products
+    </button>
+
+    <button class="category" onclick="filterProducts('seeds')">
+        🌱 Seeds
+    </button>
+
+    <button class="category" onclick="filterProducts('fertilizers')">
+        🪴 Fertilizers
+    </button>
+
+    <button class="category" onclick="filterProducts('organic')">
+        🌿 Organic Products
+    </button>
+
+    <button class="category" onclick="filterProducts('tools')">
+        🔧 Tools
+    </button>
+
+    <button class="category" onclick="filterProducts('pesticides')">
+        🧴 Pesticides
+    </button>
+
+    <input
+        class="search"
+        type="text"
+        placeholder="🔍 Search products..."
+        onkeyup="searchProducts(this.value)"
+    >
+
+</div>
+
+
+<!-- PRODUCTS -->
+
+<div class="products" id="products"></div>
+
+</div>
+
+
+<!-- ================= RIGHT SIDEBAR ================= -->
+
+<div class="sidebar">
+
+<!-- CART -->
+
+<div class="box">
+
+    <div class="box-title">
+        🛒 Your Cart (<span id="cartCount">0</span> Items)
+    </div>
+
+    <div class="cart-items" id="cartItems">
+
+        <p style="padding:15px;text-align:center;color:#777;">
+            Your cart is empty
+        </p>
+
+    </div>
+
+    <div class="total-box">
+
+        <div class="total-row">
+            <span>Subtotal</span>
+            <span>₹ <span id="subtotal">0</span></span>
+        </div>
+
+        <div class="total-row">
+            <span>Delivery Charge</span>
+            <span>₹ <span id="delivery">0</span></span>
+        </div>
+
+        <div class="total-row final">
+            <span>Total Amount</span>
+            <span>₹ <span id="total">0</span></span>
+        </div>
+
+        <button class="checkout" onclick="checkout()">
+            Proceed to Checkout →
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- CUSTOMER DETAILS -->
+
+<div class="box">
+
+    <div class="box-title">
+        👤 Customer Details & Billing
+    </div>
+
+    <div class="customer">
+
+        <label>Full Name</label>
+
+        <input
+            type="text"
+            id="customerName"
+            placeholder="Enter your name"
+        >
+
+        <label>Phone Number</label>
+
+        <input
+            type="text"
+            id="phone"
+            placeholder="Enter phone number"
+        >
+
+        <label>Delivery Address</label>
+
+        <textarea
+            id="address"
+            placeholder="Enter delivery address"
+        ></textarea>
+
+        <button class="bill-btn" onclick="generateBill()">
+            🧾 Generate Bill
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- BILL -->
+
+<div class="box">
+
+    <div class="box-title">
+        🧾 Order Bill
+    </div>
+
+    <div class="bill" id="bill">
+
+        <p style="text-align:center;color:#777;">
+            Bill will appear here
+        </p>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-item">
+        <h3>🌿 Why Choose Sunrises?</h3>
+    </div>
+
+    <div class="footer-item">
+        <h3>🌱 Quality Products</h3>
+        <p>Pure & natural</p>
+    </div>
+
+    <div class="footer-item">
+        <h3>🛡️ Secure Payment</h3>
+        <p>100% safe transactions</p>
+    </div>
+
+    <div class="footer-item">
+        <h3>🚚 Fast Delivery</h3>
+        <p>Across India</p>
+    </div>
+
+    <div class="footer-item">
+        <h3>🌾 Support Farmers</h3>
+        <p>Your purchase helps farmers</p>
+    </div>
+
+</footer>
+
+
+<script>
+
+/* ================= PRODUCT DATA ================= */
+
+const products = [
+
+{
+    id:1,
+    name:"Wheat Seeds",
+    category:"seeds",
+    description:"High yield, disease resistant.",
+    pack:"1 kg",
+    price:250,
+    image:"https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+    id:2,
+    name:"Paddy Seeds (Rice)",
+    category:"seeds",
+    description:"Premium quality, high germination.",
+    pack:"1 kg",
+    price:320,
+    image:"https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+    id:3,
+    name:"Maize Seeds",
+    category:"seeds",
+    description:"High productivity, hybrid variety.",
+    pack:"1  kg",
+    price:280,
+    image:"mm1.jpg"
+},
+{
+    id:4,
+    name:"Tomato Seeds",
+    category:"seeds",
+    description:"Disease resistant, high yield.",
+    pack:"1 g",
+    price:75,
+    image:"https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+    id:5,
+    name:"Organic Manure",
+    category:"organic",
+    description:"100% organic, improves soil health.",
+    pack:"25 kg",
+    price:450,
+    image:"https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+    id:6,
+    name:"Urea Fertilizer",
+    category:"fertilizers",
+    description:"Nitrogen rich, boosts plant growth.",
+    pack:"50 kg",
+    price:1200,
+    image:"https://images.unsplash.com/photo-1628352081506-83c43123ed6d?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+    id:7,
+    name:"Neem Oil (Pesticide)",
+    category:"pesticides",
+    description:"Organic, controls pests naturally.",
+    pack:"1 L",
+    price:180,
+    image:"https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+    id:8,
+    name:"Hand Hoe",
+    category:"tools",
+    description:"Strong and durable.",
+    pack:"1 pc",
+    price:350,
+    image:"https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+    id:9,
+    name:"Drip Irrigation Pipe",
+    category:"tools",
+    description:"Saves water, better yield.",
+    pack:"100 m",
+    price:1850,
+    image:"https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=500&q=80"
+},
+
+{
+    id:10,
+    name:"Knapsack Sprayer",
+    category:"tools",
+    description:"Easy to use, high pressure.",
+    pack:"1 pc",
+    price:1250,
+    image:"kn.jpg"
+}
+
+];
+
+let cart = [];
+
+
+/* ================= DISPLAY PRODUCTS ================= */
+
+function displayProducts(list = products) {
+
+    const container = document.getElementById("products");
+
+    container.innerHTML = "";
+
+    list.forEach(product => {
+
+        container.innerHTML += `
+
+        <div class="product">
+
+            <img src="${product.image}" alt="${product.name}">
+
+            <h3>${product.name}</h3>
+
+            <p>${product.description}</p>
+
+            <p>Pack: ${product.pack}</p>
+
+            <div class="price">
+                ₹ ${product.price} / ${product.pack}
+            </div>
+
+            <div class="product-bottom">
+
+                <div class="qty">
+
+                    <button onclick="changeProductQty(${product.id},-1)">
+                        −
+                    </button>
+
+                    <span id="qty-${product.id}">1</span>
+
+                    <button onclick="changeProductQty(${product.id},1)">
+                        +
+                    </button>
+
+                </div>
+
+                <button
+                    class="add-btn"
+                    onclick="addToCart(${product.id})"
+                >
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+/* ================= PRODUCT QUANTITY ================= */
+
+function changeProductQty(id, change) {
+
+    const element = document.getElementById("qty-" + id);
+
+    let qty = parseInt(element.innerText);
+
+    qty += change;
+
+    if(qty < 1)
+        qty = 1;
+
+    element.innerText = qty;
+}
+
+
+/* ================= ADD TO CART ================= */
+
+function addToCart(id) {
+
+    const product = products.find(p => p.id === id);
+
+    const qtyElement =
+        document.getElementById("qty-" + id);
+
+    const qty =
+        parseInt(qtyElement.innerText);
+
+    const existing =
+        cart.find(item => item.id === id);
+
+    if(existing) {
+
+        existing.qty += qty;
+
+    } else {
+
+        cart.push({
+            ...product,
+            qty:qty
+        });
+
+    }
+
+    qtyElement.innerText = 1;
+
+    updateCart();
+
+}
+
+
+/* ================= UPDATE CART ================= */
+
+function updateCart() {
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    cartItems.innerHTML = "";
+
+    if(cart.length === 0) {
+
+        cartItems.innerHTML = `
+            <p style="padding:15px;text-align:center;color:#777;">
+                Your cart is empty
+            </p>
+        `;
+
+    }
+
+    let subtotal = 0;
+    let itemCount = 0;
+
+    cart.forEach(item => {
+
+        const amount =
+            item.price * item.qty;
+
+        subtotal += amount;
+
+        itemCount += item.qty;
+
+        cartItems.innerHTML += `
+
+        <div class="cart-item">
+
+            <img src="${item.image}">
+
+            <div>
+
+                <div class="cart-name">
+                    ${item.name}
+                </div>
+
+                <div class="cart-price">
+                    ₹ ${item.price}
+                </div>
+
+                <div class="cart-controls">
+
+                    <div>
+
+                        <button
+                            onclick="cartQty(${item.id},-1)">
+                            −
+                        </button>
+
+                        <span style="padding:0 8px;">
+                            ${item.qty}
+                        </span>
+
+                        <button
+                            onclick="cartQty(${item.id},1)">
+                            +
+                        </button>
+
+                    </div>
+
+                    <div>
+                        ₹ ${amount}
+                    </div>
+
+                    <button
+                        class="delete"
+                        onclick="removeItem(${item.id})">
+                        🗑
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+
+    let delivery = 0;
+
+    if(subtotal > 0)
+        delivery = 50;
+
+    document.getElementById("subtotal").innerText =
+        subtotal.toLocaleString();
+
+    document.getElementById("delivery").innerText =
+        delivery;
+
+    document.getElementById("total").innerText =
+        (subtotal + delivery).toLocaleString();
+
+    document.getElementById("cartCount").innerText =
+        itemCount;
+
+    document.getElementById("topCart").innerText =
+        itemCount;
+
+}
+
+
+/* ================= CART QUANTITY ================= */
+
+function cartQty(id, change) {
+
+    const item =
+        cart.find(item => item.id === id);
+
+    if(!item)
+return;
+item.qty+=change;
+if (item.qty <= 0) {
+
+    cart =
+        cart.filter(item => item.id !== id);
+
+}
+
+updateCart();
+
+}
+
+
+/* ================= REMOVE ================= */
+
+function removeItem(id) {
+
+    cart =
+        cart.filter(item => item.id !== id);
+
+    updateCart();
+
+}
+
+
+/* ================= FILTER ================= */
+
+function filterProducts(category) {
+
+    document
+        .querySelectorAll(".category")
+        .forEach(btn => btn.classList.remove("active"));
+
+    event.target.classList.add("active");
+
+    if (category === "all") {
+
+        displayProducts(products);
+
+    } else {
+
+        displayProducts(
+            products.filter(
+                p => p.category === category
+            )
+        );
+
+    }
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchProducts(value) {
+
+    const result =
+        products.filter(product =>
+            product.name
+            .toLowerCase()
+            .includes(value.toLowerCase())
+        );
+
+    displayProducts(result);
+
+}
+
+
+/* ================= CHECKOUT ================= */
+
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert("Your cart is empty!");
+
+        return;
+
+    }
+
+    document
+        .querySelector(".customer")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+    alert(
+        "Please enter your customer details and generate the bill."
+    );
+
+}
+
+
+/* ================= BILL ================= */
+
+function generateBill() {
+
+    if (cart.length === 0) {
+
+        alert("Please add products to your cart first.");
+
+        return;
+
+    }
+
+    const name =
+        document.getElementById("customerName").value;
+
+    const phone =
+        document.getElementById("phone").value;
+
+    const address =
+        document.getElementById("address").value;
+
+    if (
+        name === "" ||
+        phone === "" ||
+        address === ""
+    ) {
+
+        alert("Please enter all customer details.");
+
+        return;
+
+    }
+
+    let subtotal = 0;
+
+    let rows = "";
+
+    cart.forEach((item, index) => {
+
+        const amount =
+            item.price * item.qty;
+
+        subtotal += amount;
+
+        rows += `
+
+        <tr>
+
+            <td>${index + 1}</td>
+
+            <td>${item.name}</td>
+
+            <td>${item.qty}</td>
+
+            <td>₹ ${item.price}</td>
+
+            <td>₹ ${amount}</td>
+
+        </tr>
+
+        `;
+
+    });
+
+    const delivery = 50;
+
+    const total =
+        subtotal + delivery;
+
+    document.getElementById("bill").innerHTML = `
+
+        <p>
+            <b>Customer:</b> ${name}
+        </p>
+
+        <p>
+            <b>Phone:</b> ${phone}
+        </p>
+
+        <p>
+            <b>Address:</b> ${address}
+        </p>
+
+        <br>
+
+        <table>
+
+            <tr>
+
+                <th>Sl.No</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Amount</th>
+
+            </tr>
+
+            ${rows}
+
+            <tr>
+
+                <td colspan="4">
+                    <b>Subtotal</b>
+                </td>
+
+                <td>
+                    ₹ ${subtotal}
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td colspan="4">
+                    Delivery Charge
+                </td>
+
+                <td>
+                    ₹ ${delivery}
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td colspan="4">
+                    <b>Total Amount</b>
+                </td>
+
+                <td>
+                    <b>₹ ${total}</b>
+                </td>
+
+            </tr>
+
+        </table>
+
+        <p style="text-align:center;margin-top:10px;">
+            🌱 Thank you for supporting Indian Farmers!
+        </p>
+
+    `;
+
+}
+
+
+/* ================= START ================= */
+
+displayProducts();
+
+updateCart();
+
+</script>
+
+</body>
+</html>
